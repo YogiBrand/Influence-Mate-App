@@ -11,12 +11,13 @@ import {
   Facebook,
   MessageCircle,
   Youtube,
-  Music
+  Music,
+  type LucideIcon
 } from 'lucide-react';
 import { useCommunications } from '../hooks/useCommunications';
-import { Platform } from '../types/communications';
+import { Platform, MessageStatus } from '../types/communications';
 
-const platformIcons = {
+const platformIcons: Partial<Record<Platform, LucideIcon>> = {
   email: Mail,
   instagram: Instagram,
   twitter: Twitter,
@@ -27,7 +28,7 @@ const platformIcons = {
   tiktok: Music
 };
 
-const statusOptions = [
+const statusOptions: { value: MessageStatus; label: string; color: string }[] = [
   { value: 'pending', label: 'Pending', color: 'bg-yellow-500' },
   { value: 'replied', label: 'Replied', color: 'bg-green-500' },
   { value: 'ignored', label: 'Ignored', color: 'bg-gray-500' },
@@ -46,7 +47,7 @@ export const FilterBar: React.FC = () => {
     setFilters({ platforms: newPlatforms });
   };
 
-  const toggleStatus = (status: string) => {
+  const toggleStatus = (status: MessageStatus) => {
     const newStatus = filters.status.includes(status)
       ? filters.status.filter(s => s !== status)
       : [...filters.status, status];
@@ -162,7 +163,7 @@ export const FilterBar: React.FC = () => {
           >
             <div className="flex items-center space-x-2">
               {filters.platforms.map((platform) => {
-                const Icon = platformIcons[platform];
+                const Icon = platformIcons[platform] || MessageCircle;
                 return (
                   <span
                     key={platform}

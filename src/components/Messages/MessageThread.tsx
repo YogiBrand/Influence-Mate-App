@@ -13,6 +13,7 @@ import {
   Workflow,
   Bot,
   Sparkles,
+  X,
   ToggleLeft,
   ToggleRight
 } from 'lucide-react';

@@ -111,7 +111,7 @@ export function NavbarSegmented({ active, onNavigate }: NavbarSegmentedProps) {
         </Text>
         <SegmentedControl
           value={section}
-          onChange={(value: 'intelligence' | 'relationship') => setSection(value)}
+          onChange={(value) => setSection(value as 'intelligence' | 'relationship')}
           transitionTimingFunction="ease"
           fullWidth
           data={[
